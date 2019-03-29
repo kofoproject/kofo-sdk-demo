@@ -67,7 +67,7 @@ node maker.js
 ```
 ps: maker数据存储在cache/maker.json
 
-具体调用参考 [**kofo api**](https://github.com/drunken005/kofo-sdk/blob/master/README.md)
+具体调用参考 [**kofo api**](https://github.com/kofoproject/kofo-sdk/blob/master/docs/API.md)
 
 ### Create preimage and hvalue
 ```bash
