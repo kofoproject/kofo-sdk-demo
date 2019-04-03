@@ -12,7 +12,8 @@
     "@zilliqa-js/crypto": "^0.5.0",
     "eosjs-ecc": "^4.0.4",
     "ethers": "^4.0.26",
-    "kofo-sdk": "^1.2.3",
-    "lodash": "^4.17.11"
+    "kofo-sdk": "^1.2.4",
+    "lodash": "^4.17.11",
+    "tslib": "^1.9.3"
   }
 }

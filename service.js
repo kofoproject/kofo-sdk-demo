@@ -38,7 +38,7 @@ class Service {
     }
 
     insertData(key, value) {
-        let data = _read();
+        let data = this._read();
         data = Object.assign(data, {[key]: value});
         fs.writeFileSync(this.cachePath, JSON.stringify(data));
     }
@@ -84,22 +84,20 @@ class Service {
             mqUrl: config.MQ_URL,
             gateway: config.GATEWAY_URL,
             settlement: config.SETTLEMENT_URL,
-            insertData: this.insertData,
-            readData: this.readData,
+            insertData: this.insertData.bind(this),
+            readData: this.readData.bind(this),
             resetMqOptions: this.resetMqOptions.bind(this),
             mqOptions: createMqOptions(this.options),
-            cacheEncrypt: false,
+            cacheEncrypt: true,
         };
 
         this.kofo = Kofo.init(options);
 
-        this.kofo.subscribe('kofo_status_notice', this.listener);
+        this.kofo.subscribe('kofo_status_notice', this.listener.bind(this));
 
-        this.kofo.subscribe('kofo_tx_signature', this.signatureTxHandler);
+        this.kofo.subscribe('kofo_tx_signature', this.signatureTxHandler.bind(this));
     }
 
 }
 
 module.exports = Service;
-
-
