@@ -1,53 +1,15 @@
-const _ = require('lodash');
-const ecc = require('eosjs-ecc');
-const {Wallet: __wallet__, utils} = require("ethers");
-const TronUtil = require('./packages/tron-util');
+const KofoWallet = require('kofo-wallet');
 
+const chain = 'EOS';
+const currency = 'EOS';
+const privateKey = '5KftyBCnWCUf5KnxJYf8Xrtgs91JFRVKDfjn1PSoZbt5Woqz6Px';
+const rawTransaction = 'af702ef6a2ebafca7213a0a4d62f039c88e1ddff5248d738c3b5b81a1bfa355b';
 
-function EosSign(privateKey, rawTransaction) {
-    if (_.isArray(rawTransaction)) {
-        return _.map(rawTransaction, (doc) => {
-            return ecc.signHash(doc, privateKey);
-        })
-    }
-    return ecc.signHash(rawTransaction, privateKey);
-
-}
-
-async function EthSign(privateKey, rawTransaction) {
-    let wallet = new __wallet__(privateKey);
-    let tx = utils.parseTransaction(rawTransaction);
-    return await wallet.sign(tx);
-}
-
-function TronSign(privateKey, rawTransaction) {
-    return TronUtil.signRawTransaction(privateKey, rawTransaction);
-}
-
-const mapping = {
-    'EOS': EosSign,
-    'BOS': EosSign,
-    'ETH': EthSign,
-    'TRON': TronSign
+let signTx = async () => {
+    let wallet = KofoWallet.importPrivateWallet({chain, currency, privateKey});
+    console.log(wallet.export());
+    let signedTx = await wallet.sign(rawTransaction);
+    console.log({signedTx});
 };
 
-//chain 只支持 BOS/EOS/ETH/TRON
-async function sign(chain, privateKey, rawTransaction) {
-    chain = chain.toUpperCase();
-    let provider = mapping[chain];
-    if (!provider) {
-        throw new Error('chain error.');
-    }
-    let signed = await provider(privateKey, rawTransaction);
-    console.log(signed);
-    return signed;
-}
-
-// 更改这三个参数
-const chain = 'EOS';
-const privateKey = '5JA4QNHpf1HjwAP6SK4MdrWnb2SBAAxrXN5tNfZe6zL1Je7s1MZ';
-const rawTransaction = '57ff1ad29d7c0ce27bfd64246b784d434e80a5661da98e67fe16a20d7147dc97';
-
-
-//使用方式
-sign(chain, privateKey, rawTransaction).catch(console.log);
+signTx().catch(console.log);

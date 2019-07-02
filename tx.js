@@ -1,5 +1,5 @@
-const utils = require('kofo-sdk').Utils;
+const {Utils} = require('kofo-sdk');
 
-let s = utils.createPreImage();
-let h = utils.sha256Twice(s);
+let s = Utils.createPreImage();
+let h = Utils.createHValue(s);
 console.log({s, h});

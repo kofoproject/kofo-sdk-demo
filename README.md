@@ -4,7 +4,7 @@
 npm i
 ```
 
-Demo 中实现了 Maker, Taker 跨链交易的sdk调用, taker和maker对应的账号
+Demo 中实现了 Maker, Taker 跨链交易的sdk调用, taker和maker对应的账号(Test network)
 
 # MAKER
 ```js
