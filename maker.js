@@ -1,9 +1,9 @@
 const Service = require('./service/service');
 const _ = require('lodash');
 const kofo = {
-    kofoId: 'KOFOpjSNV3qkpQJxt8jNKe4Uv5KRruwW1vFhHCLP9jKRzMGa',
-    pubkey: '02c5345dad9bc17627eb6127e4c610113d1b7d0848613b91c91cdb8edbaa6f467f',
-    secret: '06ac4dbc0019cf86d975a2979a38b802f356510d168a4a985a153b017a71d111'
+    kofoId: 'KOFO2BHsbzE6ktUGD9a9xSQjChvQzR7B8eeDkN57wznNSL936',
+    pubkey: '03f6ad389f24ace5cf5eb74cb9b3c79ff9a9ecb8899119aca519813f0fe88b9101',
+    secret: '3794ff84216d866b8e5f3e890f7dcc2ae3bfe3f3e05809f1c050ab16b93bd491'
 };
 let config = require('./config/config');
 
@@ -11,15 +11,15 @@ config = _.assign({}, config, kofo, {
     blockChain: [
         {
             chain: 'BOS',
-            privateKey: '5JA4QNHpf1HjwAP6SK4MdrWnb2SBAAxrXN5tNfZe6zL1Je7s1MZ'
+            privateKey: '5Jh1n436LqN2XcXScqo22pg7X66CLrMeM6HxCRVGqoheQEnMeYh'
         },
         {
             chain: 'EOS',
-            privateKey: '5JA4QNHpf1HjwAP6SK4MdrWnb2SBAAxrXN5tNfZe6zL1Je7s1MZ'
+            privateKey: '5Jh1n436LqN2XcXScqo22pg7X66CLrMeM6HxCRVGqoheQEnMeYh'
         },
         {
             chain: 'MEETONE',
-            privateKey: '5JA4QNHpf1HjwAP6SK4MdrWnb2SBAAxrXN5tNfZe6zL1Je7s1MZ'
+            privateKey: '5Jh1n436LqN2XcXScqo22pg7X66CLrMeM6HxCRVGqoheQEnMeYh'
         },
         {
             chain: 'ETH',
@@ -30,11 +30,11 @@ config = _.assign({}, config, kofo, {
             privateKey: 'af7c83e40cc67a355852b44051fc9e34452375ae569d5c18dd62e3859b9be229'
         }
     ],
-    deviceId: '07FED02BDB20EFE5',
+    deviceId: '07FED02BDB20EFE52',
     nonce: 1,
     overwrite: 0,
     clean: false,
-    roleEnum: 'maker'
+    cachePath: `${__dirname}/cache/maker.json`
 });
 
 new Service(config).run();

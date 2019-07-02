@@ -29,18 +29,17 @@ let createMqOptions = (options) => {
 class Service {
     constructor(options) {
         this.options = options;
-        this.cachePath = `${__dirname}/cache/${options.roleEnum}.json`;
     }
 
     _read() {
-        let data = fs.readFileSync(this.cachePath);
+        let data = fs.readFileSync(this.options.cachePath);
         return JSON.parse(data.toString());
     }
 
     insertData(key, value) {
         let data = this._read();
         data = Object.assign(data, {[key]: value});
-        fs.writeFileSync(this.cachePath, JSON.stringify(data));
+        fs.writeFileSync(this.options.cachePath, JSON.stringify(data));
     }
 
     readData(key) {
@@ -50,7 +49,7 @@ class Service {
 
 
     cleanCache() {
-        fs.writeFileSync(this.cachePath, '{}');
+        fs.writeFileSync(this.options.cachePath, '{}');
     }
 
     async trxSign(privateKey, rawTransaction) {
@@ -106,10 +105,10 @@ class Service {
     };
 
     listener(data) {
-        if (data.type === 'init_sdk' && data.status !== 'success') {
+        if (data.type === 'init_mqtt' && data.status !== 'connected') {
             return console.log(`${_.toUpper(data.type)}=${data.status}, message=${data.message}`)
         }
-        if(data.type==='init_sdk'){
+        if(data.type==='init_mqtt'){
             return console.log(`+++++++ KOFO STATUS NOTICE: ${_.toUpper(data.type)}, params=${JSON.stringify(data)}`)
         }
         console.log(`+++++++ KOFO【${data.settlementId}】STATUS NOTICE: ${_.toUpper(data.type)}, params=${JSON.stringify(data)}`)

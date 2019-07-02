@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "kofo-sdk": "^1.3.4",
+    "kofo-sdk": "^1.3.5",
     "kofo-wallet": "^1.0.9"
   }
 }
